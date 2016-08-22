@@ -1,0 +1,23 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "disco duckify!",
+  "main": "main.js",
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "go"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wikonator/portfolio.git"
+  },
+  "author": "Wikonator",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wikonator/portfolio/issues"
+  },
+  "homepage": "https://github.com/Wikonator/portfolio#readme"
+}

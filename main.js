@@ -1,5 +1,6 @@
-var http = require("http");
+ var http = require("http");
 var fileus = require("fs");
+var generator = require("./generator.js");
 
 try {
     var projectList = fileus.readdirSync("./projects");
@@ -48,13 +49,24 @@ var serverus = http.createServer(function (req, resp) {
             var url = req.url;
             // console.log(isOnGuestList(url));
             // console.log(endsInSlash(url));
-
+            var htmlPath;
             if (!isOnGuestList(url) && endsInSlash(url)) {
                 resp.writeHead(404);
                 resp.end("Ain't here boss");
             } else if (isOnGuestList(url) && !endsInSlash(url)) {
+                if (url == "/discoduck/") {
+                    //import from generator.js;
+                    console.log("Fire n the ole!");
+                    resp.writeHead(200, {"content-type": "text/html"});
+                    var streamy = fileus.createReadStream(path);
+                    streamy.on("error", function(error) {
+                        console.log(error);
+                    });
+                    streamy.pipe(generator);
+                } else {
                 resp.writeHead(303, {"Location": url +"/"});
                 resp.end();
+                }
             } else if (isOnGuestList(url) && endsInSlash(url)) {
                 var htmlPath = __dirname + "/projects" + url + "index.html";
                 resp.writeHead(200, {"content-type": "text/html"});
